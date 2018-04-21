@@ -18,15 +18,18 @@ const styles = withStyles( theme => ({
 }));
 
 
-const Header = (props) => (
-    <div>
+const Header = (props) => {
+
+    const {classes} = props;
+
+    return <div rel="xxx" className={classes.root}>
         <Grid container spacing={24}>
             <Grid item xs={12}>
-                <Paper className={props.classes.paper}>Header</Paper>
+                <Paper className={classes.paper}>Header</Paper>
             </Grid>
         </Grid>
     </div>
-)
+}
 
 
 export default styles(Header);
