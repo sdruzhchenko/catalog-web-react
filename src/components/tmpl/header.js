@@ -10,6 +10,14 @@ import {DropDown} from 'components/common/controlls';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
+const menu = [
+    { name: '1111' },
+    { name: '2222' },
+    { name: '3333' },
+    { name: '4444' },
+];
+
+
 const Header = (props) => {
     const {classes} = props;
     return <div className={classes.root}>
@@ -18,16 +26,13 @@ const Header = (props) => {
 
             <Toolbar>
 
-
-                <DropDown>
+                <DropDown items={menu} >
 
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon/>
                     </IconButton>
 
-
-
-
+                    { item => <div>item.name</div> }
 
                 </DropDown>
 
