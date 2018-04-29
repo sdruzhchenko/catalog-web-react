@@ -1,3 +1,7 @@
-import DropDown from './drop-down';
+import DropDown from './drop-down/index';
+import OutsideClick from './outside-click/index';
 
-export { DropDown }
+export {
+    DropDown,
+    OutsideClick
+}

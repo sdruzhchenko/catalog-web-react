@@ -2,6 +2,8 @@ import React, { Component, PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {Menu, MenuItem} from 'material-ui'
 
+import {OutsideClick} from 'components/common/controlls';
+
 
 
 class DropDown extends PureComponent {
@@ -18,16 +20,14 @@ class DropDown extends PureComponent {
 
     open()
     {
-
-
         this.setState( { open: true } )
     }
 
     select()
     {
-        console.log( 'xxx' );
+        //console.log( 'xxx' );
 
-        this.setState( { open: false } )
+        //this.setState( { open: false } )
     }
 
 
@@ -36,18 +36,17 @@ class DropDown extends PureComponent {
         const children = this.props.children;
 
         return <Fragment>
+            <OutsideClick>
+                <div onClick={this.open} >
+                    {this.props.children}
+                </div>
 
-            <div onClick={this.open} >
-                {this.props.children}
-            </div>
-
-
-            <Menu open={ this.state.open } >
-                <MenuItem onClick={this.select}>zzzzz</MenuItem>
-                <MenuItem onClick={this.select}>zzzzz</MenuItem>
-                <MenuItem onClick={this.select}>zzzzz</MenuItem>
-            </Menu>
-
+                <Menu open={ this.state.open } >
+                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
+                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
+                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
+                </Menu>
+            </OutsideClick>
         </Fragment>
     }
 
