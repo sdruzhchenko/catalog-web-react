@@ -37,11 +37,11 @@ class DropDown extends PureComponent {
 
         return <Fragment>
             <OutsideClick>
-                <div onClick={this.open} >
+                <div onClick={this.open} aria-label="Menu" aria-haspopup="true" aria-owns='simple-menu' >
                     {this.props.children}
                 </div>
 
-                <Menu open={ this.state.open } >
+                <Menu open={ this.state.open } id="simple-menu" >
                     <MenuItem onClick={this.select}>zzzzz</MenuItem>
                     <MenuItem onClick={this.select}>zzzzz</MenuItem>
                     <MenuItem onClick={this.select}>zzzzz</MenuItem>

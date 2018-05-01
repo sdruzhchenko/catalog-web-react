@@ -28,7 +28,7 @@ const Header = (props) => {
 
                 <DropDown items={menu} >
 
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                    <IconButton className={classes.menuButton} color="inherit"  >
                         <MenuIcon/>
                     </IconButton>
 
