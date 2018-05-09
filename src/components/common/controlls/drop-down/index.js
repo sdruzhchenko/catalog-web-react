@@ -1,61 +1,72 @@
-import React, { Component, PureComponent, Fragment } from 'react';
+import React, { PureComponent, Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import {Menu, MenuItem} from 'material-ui'
 
-import {OutsideClick} from 'components/common/controlls';
 
+const propTypes = {
+    items:      PropTypes.array,
+    onSelect: PropTypes.func,
+    children: function( props, propName, componentName )
+    {
+        if( props[propName].length !== 2 )
+        {
+
+        }
+    }
+};
 
 
 class DropDown extends PureComponent {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false
-        };
+    state = {
+        anchorEl: null,
+    };
 
-        this.open = this.open.bind( this );
-        this.select = this.select.bind( this );
-    }
+    open = e => {
+        this.setState({ anchorEl: e.currentTarget });
+    };
 
-    open()
-    {
-        this.setState( { open: true } )
-    }
+    select = ( select ) => {
+        this.props.onSelect( select );
+        this.close();
+    };
 
-    select()
-    {
-        //console.log( 'xxx' );
+    close = () => { this.setState({ anchorEl: null }); };
 
-        //this.setState( { open: false } )
-    }
+    render() {
 
+        const { anchorEl } = this.state;
+        const [ Btn, Options ] = this.props.children;
 
-    render()
-    {
-        const children = this.props.children;
+        const Button = cloneElement( Btn, {
+            'aria-owns': anchorEl ? 'drop-down-menu' : null,
+            'aria-haspopup' : "true",
+            'onClick' : this.open
+        } );
 
-        return <Fragment>
-            <OutsideClick>
-                <div onClick={this.open} aria-label="Menu" aria-haspopup="true" aria-owns='simple-menu' >
-                    {this.props.children}
-                </div>
+        return (
+            <Fragment>
 
-                <Menu open={ this.state.open } id="simple-menu" >
-                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
-                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
-                    <MenuItem onClick={this.select}>zzzzz</MenuItem>
+                {Button}
+
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClick={this.close}
+                    onClose={this.close}
+                >
+                    {Options||''}
+
                 </Menu>
-            </OutsideClick>
-        </Fragment>
+
+            </Fragment>
+        );
     }
 
 };
 
-
-DropDown.PropTypes = {
-    items: PropTypes.array
-};
+DropDown.propTypes = propTypes;
 
 
 export default DropDown;

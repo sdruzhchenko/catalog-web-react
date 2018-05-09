@@ -1,57 +1,63 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component, PureComponent, Fragment } from 'react';
 import * as R from 'ramda';
 
-import { withStyles } from 'material-ui/styles';
-import { AppBar, Toolbar, Typography, Tabs, Tab, IconButton, Button } from 'material-ui';
+
+import { AppBar, Toolbar, Typography, Tabs, Tab, IconButton, Button, MenuItem } from 'material-ui';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { withStyles } from 'material-ui/styles';
+
+
 import {DropDown} from 'components/common/controlls';
 
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
-
 const menu = [
-    { name: '1111' },
-    { name: '2222' },
-    { name: '3333' },
-    { name: '4444' },
+    { id: 1, name: '1111' },
+    { id: 2, name: '2222' },
+    { id: 3, name: '3333' },
+    { id: 4, name: '4444' },
 ];
 
 
-const Header = (props) => {
-    const {classes} = props;
-    return <div className={classes.root}>
+class Header extends PureComponent
+{
 
-        <AppBar position="static">
+    select = ( select ) => {
 
-            <Toolbar>
+    };
 
-                <DropDown items={menu} >
+    render(){
+        const {classes} = this.props;
 
-                    <IconButton className={classes.menuButton} color="inherit"  >
-                        <MenuIcon/>
+        return <div className={classes.root}>
+
+            <AppBar position="static">
+
+                <Toolbar>
+
+                    <DropDown>
+
+                        <IconButton className={classes.menuButton} color="inherit" > <MenuIcon/> </IconButton>
+
+                        { menu.map( ( item )=>
+                            <MenuItem onClick={(e)=>this.select(item.id)} key={item.id} >{item.name}</MenuItem> ) }
+
+                    </DropDown>
+
+                    <Typography variant="title" color="inherit" className={classes.flex}>Catalog</Typography>
+
+                    <Button color="inherit">Login</Button>
+
+                    <IconButton>
+                        <AccountCircle />
                     </IconButton>
 
-                    { item => <div>item.name</div> }
+                </Toolbar>
 
-                </DropDown>
+            </AppBar>
+        </div>
+    }
 
-
-                <Typography variant="title" color="inherit" className={classes.flex}> Catalog </Typography>
-
-
-                <Button color="inherit">Login</Button>
-
-
-                <IconButton>
-                    <AccountCircle />
-                </IconButton>
-
-
-            </Toolbar>
-
-        </AppBar>
-    </div>
 }
 
 
